@@ -30,6 +30,9 @@ It browses the repository and outputs html page with statistics.
 
 ## Usage
 
+### Ignore files
+    List files that you need to ignore when generating statistic in `stat_ignore`
+
 ### Generator
 
 #### Print help
