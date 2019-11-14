@@ -17,6 +17,7 @@ require 'git_stats/git_data/blob'
 require 'git_stats/git_data/commit'
 require 'git_stats/git_data/repo'
 require 'git_stats/git_data/short_stat'
+require 'git_stats/git_data/num_stat'
 require 'git_stats/git_data/comment_stat'
 require 'git_stats/git_data/tree'
 

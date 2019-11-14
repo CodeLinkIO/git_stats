@@ -17,11 +17,11 @@ module GitStats
       end
 
       def insertions
-        short_stats.map(&:insertions).sum
+        num_stats.map(&:insertions).sum
       end
 
       def deletions
-        short_stats.map(&:deletions).sum
+        num_stats.map(&:deletions).sum
       end
 
       def commits_sum_by_date
@@ -44,6 +44,10 @@ module GitStats
 
       def short_stats
         commits.map(&:short_stat)
+      end
+
+      def num_stats
+        commits.map(&:num_stat)
       end
 
       def activity

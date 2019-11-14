@@ -45,6 +45,15 @@ module GitStats
         end
       end
 
+      def ignore_files
+        files = []
+        path = File.expand_path('../../../stat_ignore', File.dirname(__FILE__))
+        File.readlines(path).each do |line|
+          files << line.strip
+        end
+        files
+      end
+
       def commits
         @commits ||= run_and_parse("git rev-list --pretty=format:'%H|%at|%ai|%aE' #{commit_range} #{tree_path} | grep -v commit").map do |commit_line|
           Commit.new(
@@ -52,7 +61,8 @@ module GitStats
               sha: commit_line[:sha],
               stamp: commit_line[:stamp],
               date: DateTime.parse(commit_line[:date]),
-              author: authors.first! { |a| a.email == commit_line[:author_email] }
+              author: authors.first! { |a| a.email == commit_line[:author_email] },
+              ignore_files: ignore_files
           )
         end.sort_by! { |e| e.date }
       end
@@ -105,6 +115,10 @@ module GitStats
 
       def short_stats
         @short_stats ||= commits.map(&:short_stat)
+      end
+
+      def num_stats
+        @num_stats ||= commits.map(&:num_stat)
       end
 
       def comment_stats

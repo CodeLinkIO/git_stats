@@ -22,7 +22,7 @@
     %td= "#{repo.files_count} (#{:binary.t}: #{repo.binary_files.size}, #{:text.t}: #{repo.text_files.size})"
   %tr
     %td= :total_lines.t
-    %td= "#{repo.lines_count} #{:lines.t} (#{repo.short_stats.map(&:insertions).sum} #{:insertions.t}, #{repo.short_stats.map(&:deletions).sum} #{:deletions.t})"
+    %td= "#{repo.lines_count} #{:lines.t} (#{repo.num_stats.map(&:insertions).sum} #{:insertions.t}, #{repo.num_stats.map(&:deletions).sum} #{:deletions.t})"
   %tr
     %td= :total_commits.t
     %td= repo.commits.size
