@@ -46,6 +46,10 @@ en:
   insertions_by_author_by_date: Lines added by author by date
   deletions_by_author_by_date: Lines deleted by author by date
   changed_lines_by_author_by_date: Changed lines by author by date
+  commits_sum_by_author_by_day: Commits sum by author by day
+  insertions_by_author_by_day: Lines added by author by day
+  deletions_by_author_by_day: Lines deleted by author by day
+  changed_lines_by_author_by_day: Changed lines by author by day
   best_authors: Best authors
   insertions: Lines added
   deletions: Lines deleted

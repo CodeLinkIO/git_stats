@@ -10,6 +10,14 @@
       %a{href: 'insertions_by_author_by_date.html'}= :insertions_by_author_by_date.t
     %li{class: page == :deletions_by_author_by_date ? "active" : ""}
       %a{href: 'deletions_by_author_by_date.html'}= :deletions_by_author_by_date.t
+    %li{class: page == :commits_sum_by_author_by_day ? "active" : ""}
+      %a{href: 'commits_sum_by_author_by_day.html'}= :commits_sum_by_author_by_day.t
+    %li{class: page == :changed_lines_by_author_by_day ? "active" : ""}
+      %a{href: 'changed_lines_by_author_by_day.html'}= :changed_lines_by_author_by_day.t
+    %li{class: page == :insertions_by_author_by_day ? "active" : ""}
+      %a{href: 'insertions_by_author_by_day.html'}= :insertions_by_author_by_day.t
+    %li{class: page == :deletions_by_author_by_day ? "active" : ""}
+      %a{href: 'deletions_by_author_by_day.html'}= :deletions_by_author_by_day.t
 
   .tab-content
     .tab-pane.active
@@ -64,5 +72,25 @@
 
       -elsif page == :deletions_by_author_by_date
         = high_stock("charts.deletions_by_author_by_date", charts.deletions_by_author_by_date)
+        %small
+          %center= "5 #{:best_authors_shown.t}"
+      
+      -elsif page == :commits_sum_by_author_by_day
+        = high_stock("charts.commits_sum_by_author_by_day", charts.commits_sum_by_author_by_day)
+        %small
+          %center= "5 #{:best_authors_shown.t}"
+
+      -elsif page == :changed_lines_by_author_by_day
+        = high_stock("charts.changed_lines_by_author_by_day", charts.changed_lines_by_author_by_day)
+        %small
+          %center= "5 #{:best_authors_shown.t}"
+
+      -elsif page == :insertions_by_author_by_day
+        = high_stock("charts.insertions_by_author_by_day", charts.insertions_by_author_by_day)
+        %small
+          %center= "5 #{:best_authors_shown.t}"
+
+      -elsif page == :deletions_by_author_by_day
+        = high_stock("charts.deletions_by_author_by_day", charts.deletions_by_author_by_day)
         %small
           %center= "5 #{:best_authors_shown.t}"
