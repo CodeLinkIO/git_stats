@@ -33,7 +33,7 @@ module GitStats
       end
 
       def commits_sum_by_day
-        commits.group_by(&:date).map{|k, v| [key, v.count]}
+        commits.group_by{|c| Date.parse(c.date.to_s)}.map{|k, v| [k, v.count]}
       end
 
       [:insertions, :deletions, :changed_lines].each do |method|
@@ -46,14 +46,8 @@ module GitStats
         end
 
         define_method "#{method}_by_day" do
-          sum = 0
-          commits.map { |commit|
-            sum += commit.num_stat.send(method)
-            [commit.date, sum]
-          }
-
-          commits.group_by(&:date).map do |k, v|
-            v.map{|commit| commit.num_stat.send(method) }.sum(:+)
+          commits.group_by{|c| Date.parse(c.date.to_s)}.map do |k, v|
+            [k, v.map{|commit| commit.num_stat.send(method) }.inject(0, :+)]
           end
         end
       end

@@ -3,7 +3,7 @@ module GitStats
   module StatsView
     module Charts
       class AuthorsCharts
-        AUTHORS_ON_CHART_LIMIT = 4
+        AUTHORS_ON_CHART_LIMIT = 7
 
         def initialize(authors)
           @authors = authors
@@ -13,6 +13,16 @@ module GitStats
           Chart.new do |f|
             f.multi_date_chart(
                 data: (authors || @authors.sort_by { |author| -author.commits.size }[0..AUTHORS_ON_CHART_LIMIT]).map { |author| {name: author.name, data: author.commits_sum_by_date} },
+                title: :lines_by_date.t,
+                y_text: :lines.t
+            )
+          end
+        end
+
+        def commits_sum_by_author_by_day(authors = nil)
+          Chart.new do |f|
+            f.multi_date_chart(
+                data: (authors || @authors.sort_by { |author| -author.commits.size }[0..AUTHORS_ON_CHART_LIMIT]).map { |author| {name: author.name, data: author.commits_sum_by_day} },
                 title: :lines_by_date.t,
                 y_text: :lines.t
             )

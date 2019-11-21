@@ -19,6 +19,10 @@ module GitStats
         @path ||= '.'
       end
 
+      def after
+        @after
+      end
+
       def first_commit_sha
         @first_commit_sha
       end
@@ -55,7 +59,7 @@ module GitStats
       end
 
       def commits
-        @commits ||= run_and_parse("git rev-list --pretty=format:'%H|%at|%ai|%aE' #{commit_range} #{tree_path} | grep -v commit").map do |commit_line|
+        @commits ||= run_and_parse("git rev-list --pretty=format:'%H|%at|%ai|%aE' --after='#{@after}' #{commit_range} #{tree_path} | grep -v commit").map do |commit_line|
           Commit.new(
               repo: self,
               sha: commit_line[:sha],
@@ -71,12 +75,12 @@ module GitStats
         commits.map(&:date).minmax
       end
 
-      def commits_count_by_author(limit = 4)
+      def commits_count_by_author(limit = 7)
         Hash[authors.map { |author| [author, author.commits.size] }.sort_by { |author, commits| -commits }[0..limit]]
       end
 
       [:insertions, :deletions, :changed_lines].each do |method|
-        define_method "#{method}_by_author" do |limit = 4|
+        define_method "#{method}_by_author" do |limit = 7|
           Hash[authors.map { |author| [author, author.send(method)] }.sort_by { |author, lines| -lines }[0..limit]]
         end
       end
