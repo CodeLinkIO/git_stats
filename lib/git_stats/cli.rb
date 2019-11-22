@@ -11,7 +11,7 @@ class GitStats::CLI < Thor
   option :silent, :aliases => :s, :type => :boolean, :desc => 'Silent mode. Don\'t output anything.'
   option :tree, :aliases => :d, :default => '.', :desc => 'Tree where statistics should be generated.'
   option :comment_string, :aliases => :c, :default => '//', :desc => 'The string which is used for comments.'
-  option :after, :aliases => :a, :default => '//', :desc => 'Generate statistic after this date'
+  option :after, :aliases => :a, :desc => 'Generate statistic after this date'
   
   desc 'generate', 'Generates the statistics of a repository'
   def generate
