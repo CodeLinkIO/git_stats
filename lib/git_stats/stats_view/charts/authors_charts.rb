@@ -49,6 +49,19 @@ module GitStats
               )
             end
           end
+
+          def modified_by_author_by_day(author)
+            data = []
+            data << {name: "Insertion", data: author.send("insertions_by_day")}
+            data << {name: "Deletion", data: author.send("deletions_by_day")}
+            Chart.new do |f|
+              f.multi_date_chart(
+                  data: data,
+                  title: :modified_by_day.t,
+                  y_text: :lines.t
+              )
+            end
+          end
         end
 
       end
