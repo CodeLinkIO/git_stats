@@ -59,7 +59,6 @@ module GitStats
       end
 
       def commits
-        puts "value #{@after}"
         command = @after.nil? ? "git rev-list --pretty=format:'%H|%at|%ai|%aE' #{commit_range} #{tree_path} | grep -v commit" : "git rev-list --pretty=format:'%H|%at|%ai|%aE' --after='#{@after}' #{commit_range} #{tree_path} | grep -v commit"
         @commits ||= run_and_parse(command).map do |commit_line|
           Commit.new(
